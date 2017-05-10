@@ -5,7 +5,8 @@
   "license": "MIT",
   "proxy": "http://localhost:3001",
   "dependencies": {
-    "concurrently": "^3.4.0"
+    "concurrently": "^3.4.0",
+    "react-scripts": "0.7.0"
   },
   "engines": {
   	"node": "4.4.7"
