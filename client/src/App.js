@@ -10,7 +10,12 @@ class App extends Component {
 
 
     async componentDidMount() {
-    const response = await fetch('/cities')
+    const response = await fetch('/cities', {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    })
     const cities = await response.json()
 
     this.setState({cities: cities})

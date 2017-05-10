@@ -1,7 +1,13 @@
 import bodyParser from 'body-parser'
 import express from 'express'
-
 import path from 'path'
+const app = express()
+
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+
+const router = express.Router()
 
 //get the built react project
 const staticFiles = express.static(path.join(__dirname,'../../client/build'))
@@ -9,13 +15,8 @@ const staticFiles = express.static(path.join(__dirname,'../../client/build'))
 //pass the static files (react app) to the express app
 app.use(staticFiles)
 
-const app = express()
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
 
 
-const router = express.Router()
 
 router.get('/cities',(req,res) => {
 	const cities =[
