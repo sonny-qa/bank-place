@@ -1,77 +1,46 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, IndexRoute, hashHistory, browserHistory} from 'react-router';
+
+import { Button, Grid, Row, Col } from 'react-bootstrap'
+
 import logo from './logo.svg';
 import './App.css';
-
+const imgUrl = require('./img/main.jpg')
 
 class App extends Component {
   render(){
+
+    
+    console.log(imgUrl)
     return (
       <Router history={browserHistory}>
         <Route path='/' component={Container} >
           <IndexRoute component={Home}/>
-            <Route path='/address' component={Address} >
-              <IndexRoute component={twitter_feed}/>
-              <Route path='instagram' component={instagram}/>
-              <Route path='query' component={Query}/>
-            </Route>
-            <Route path='/NamedComponent' component={NamedComponents}>
-              <IndexRoute components={{title:Title2, subTitle:subTitle}}/> 
-            </Route>
-            <Route path='/about/(:name)' component={About}/>
+            
+              
           <Route path='*' component={Notfound} />
         </Route>
       </Router>)
   }
 }
 
-const Query = (props) => (
-  <h2>{props.location.query.message}</h2>
-  )
 
-const About = (props) => (
-  <div>
-    <h3>Welcome to the about page</h3>
-    { props.params.name && <h2>Hello, {props.params.name}</h2>}
-  </div>)
 
-const NamedComponents = (props) => (
-  <div>
-    {props.title} <br/>
-    {props.subTitle}
-  </div>)
 
-const Title2 = () => (
-  <h1>Hello from title component</h1>
-  )
 
-const subTitle = () => (
-  <h1>Hello from subtitle component</h1>)
 
-const Home = () => <h1>Hello from Home!</h1>
-const Address = (props) => 
-  <div>
-    <br />
-    <Link to='/address'>Twitter Feed</Link>
-    <Link to='/address/instagram'> Instagram feed</Link>
-    <h1>We are still located in the US</h1>
-    {props.children}
-  </div>
 
-const instagram = () => <h3> Instagram feed </h3>
-const twitter_feed = () => <h3> twitter feed </h3>
+const Home = () => <h1>Welcome to Bank Place Leaseholder forum!</h1>
+
+
+
 
 const Notfound = () => <h1>Page not found....</h1>
 
 const Nav = () => (
   <div>
     <Link to='/'>Home </Link>&nbsp;
-    <Link to='/address'>Address </Link>
-    <Link to='/NamedComponent'>Named components</Link>
-    <Link to={{
-                pathname: '/address/query',
-                query: {message: 'Hello from route query'} 
-              }}>Route query</Link>
+
   </div>
   )
 
@@ -79,47 +48,32 @@ const Nav = () => (
 //will be accessible via props.children, 
 //e.g. Home, Address and Notfound are props.children
 //react router deciedes which one of these UI elements to render
-const Container = (props) => 
-  <div>
-  <Nav/>
-  {props.children}
-  </div>
+const Container = (props) => (
 
+  <Grid>
+    <Row className='Show-grid'>
+      <Col xs={12} md={12}><div className='text-center'><h2 >Bank Place Wilmslow Forum</h2></div></Col>
+    </Row>
+
+     <Row className='Show-grid'>
+      <Col xs={12} md={12}><div className='text-center'><h4 >This forum is for leaseholders of apartments in Bank Place Wilmslow to discuss any issues. <br/> <br/> Please register your details for access</h4></div></Col>
+    </Row>
+
+    
+     <Row className='Show-grid'>
+      <Col xs={12} md={12}><div className='text-center'><img src={imgUrl} alt=""/></div></Col>
+      <Col xs={12} md={12}><div className='text-center'><br/></div></Col>
+    </Row>
+
+     <Row className="show-grid">
+      <Col xs={3} md={3}></Col>
+       <Col xs={3} md={3}><div className='text-center'><Button bsStyle="success">Register</Button></div></Col>
+        <Col xs={3} md={3}><div className='text-center'><Button bsStyle="danger">Login</Button></div></Col>
+        <Col xs={3} md={3}></Col>
+    </Row>
+        
+  </Grid>
+
+)
 export default App
-// class App extends Component {
-//    constructor(props) {
-//     super(props);
-//     this.state = {cities:[]}
-//   }
-
-
-
-//     async componentDidMount() {
-//       try {
-//         let response = await fetch('/cities')
-//         let responseJson = await response.json();
-
-//         this.setState({cities:responseJson})
-//       } catch(error){
-//         console.log(error)
-//       }
-//     }
-
-
-//   render() {
-//     return (
-//         <div>
-//         <p> Good Morn </p> 
-//         <ul>
-//           {this.state.cities.map( city => {
-//             return <li key={city.name}> <b>{city.name}</b>: {city.population} </li>
-//           })}
-//         </ul>
-//       </div>
-//     );
-//   }
-// }
-
-//export default App;
-
 

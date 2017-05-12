@@ -1,7 +1,15 @@
 .App {
   text-align: center;
 }
-
+img
+{
+    max-width: 40%;
+    min-width: 80px;
+    height: auto;
+}
+.jumbo {
+  padding-left: 40px;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
