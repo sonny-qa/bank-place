@@ -30,7 +30,11 @@ router.get('/cities',(req,res) => {
 
 app.use(router)
 
-app.use('/*',staticFiles)
+//app.use('/*',staticFiles)
+//for all other files, serve these from the bundle injected into the index.html
+app.get('*', function(request,response){
+	response.sendFile(path.resolve(__dirname,'public','index.html'))
+})
 
 app.set('port', (process.env.PORT || 3001))
 

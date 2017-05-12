@@ -1,71 +1,80 @@
 import React, { Component } from 'react';
+import { Router, Route, Link, IndexRoute, hashHistory, browserHistory} from 'react-router';
 import logo from './logo.svg';
 import './App.css';
 
+
 class App extends Component {
-   constructor(props) {
-    super(props);
-    this.state = {cities:[]}
-  }
-
-
-    async componentDidMount() {
-    const response = await fetch('/cities', {
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-    })
-    const cities = await response.json()
-
-    this.setState({cities: cities})
-  }
-
-  render() {
+  render(){
     return (
-        <div>
-        <p> hello </p> 
-        <ul>
-          {this.state.cities.map( city => {
-            return <li key={city.name}> <b>{city.name}</b>: {city.population} </li>
-          })}
-        </ul>
-      </div>
-    );
+      <Router history={browserHistory}>
+        <Route path='/' component={Container} >
+          <IndexRoute component={Home}/>
+          <Route path='/address' component={Address} />
+          <Route path='*' component={Notfound} />
+        </Route>
+      </Router>)
   }
 }
 
-export default App;
+const Home = () => <h1>Hello from Home!</h1>
+const Address = () => <h1>We are located at 555 Jackson St.</h1>
 
 
-// import React, { Component } from 'react';
-// import './App.css';
+const Notfound = () => <h1>Page not found....</h1>
 
-// class App extends React.Component {
-//   constructor(props) {
+const Nav = () => (
+  <div>
+    <Link to='/'>Home </Link>&nbsp;
+    <Link to='/address'>Address </Link>
+  </div>
+  )
+
+//any routes wrapped within this 'Container' route 
+//will be accessible via props.children, 
+//e.g. Home, Address and Notfound are props.children
+//react router deciedes which one of these UI elements to render
+const Container = (props) => 
+  <div>
+  <Nav/>
+  {props.children}
+  </div>
+
+export default App
+// class App extends Component {
+//    constructor(props) {
 //     super(props);
 //     this.state = {cities:[]}
 //   }
 
 
-//   async componentDidMount() {
-//     const response = await fetch('/cities')
-//     const cities = await response.json()
 
-//     this.setState({cities: cities})
-//   }
+//     async componentDidMount() {
+//       try {
+//         let response = await fetch('/cities')
+//         let responseJson = await response.json();
 
-//   render(){
+//         this.setState({cities:responseJson})
+//       } catch(error){
+//         console.log(error)
+//       }
+//     }
+
+
+//   render() {
 //     return (
-//       <div> 
+//         <div>
+//         <p> Good Morn </p> 
 //         <ul>
 //           {this.state.cities.map( city => {
 //             return <li key={city.name}> <b>{city.name}</b>: {city.population} </li>
 //           })}
 //         </ul>
 //       </div>
-//       );
+//     );
 //   }
 // }
 
-// export default App;
+//export default App;
+
+
