@@ -1,43 +1,18 @@
-import bodyParser from 'body-parser'
-import express from 'express'
-import path from 'path'
-const app = express()
+var express = require('express');
 
+var bodyParser = require('body-parser')
+var app = express();
+var db = require('./db.js')
+var port =4000
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
-const router = express.Router()
+app.use(bodyParser.json());
 
-//get the built react project
-const staticFiles = express.static(path.join(__dirname,'../../client/build'))
+require('./routes')(app);
 
-//pass the static files (react app) to the express app
-app.use(staticFiles)
+app.listen(3001);
+console.log("Jammin\' on port 3001...");
 
-
-
-
-router.get('/cities',(req,res) => {
-	const cities =[
-	{name: 'New york',population: 7464764},
-	{name: 'Los Angeles', population: 3792621},
-    {name: 'Chicago', population: 2695598}
-    ]
-
-    res.json(cities)
-})
-
-app.use(router)
-
-//app.use('/*',staticFiles)
-//for all other files, serve these from the bundle injected into the index.html
-app.get('*', function(request,response){
-	response.sendFile(path.resolve(__dirname,'public','index.html'))
-})
-
-app.set('port', (process.env.PORT || 3001))
-
-app.listen(app.get('port'), () => {
-	 console.log(`Listening on ${app.get('port')}`)
-})
