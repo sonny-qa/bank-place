@@ -87,8 +87,8 @@ class Signup extends React.Component {
 				<div className='col-md-6 col-md-offset-3'>
 					<h2 className='text-center'> Register</h2>
 					<form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-						<Field name='First Name' type='text' component={this.renderField} label='First Name'/>
-						<Field name='Last Name' type='text' component={this.renderField} label='Last Name'/>
+						<Field name='First_Name' type='text' component={this.renderField} label='First Name'/>
+						<Field name='Last_Name' type='text' component={this.renderField} label='Last Name'/>
 						<Field name='ApartmentNumber' type='number' component={this.renderField} label='Apartment Number'/>
 						<label className="control-label">Address</label>
 						<Field name='ContactAddress' type='text' component='textarea' className='form-control' label='Address'/>

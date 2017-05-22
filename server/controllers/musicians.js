@@ -8,10 +8,11 @@ var mg = new Mailgun('dkey-26f26c48d6f0aa5b7766890e8d9f8d92');
 
 
 exports.add = function(req,res) {
-	var test = {type:(req.body.email),color: 'pink', location: 'east', install_date: '2014-04-28'}
+	console.log('data',req.body)
+	var test = {First_Name:(req.body.First_Name),Last_Name: (req.body.Last_Name), email: (req.body.Last_Name), apt_num: (req.body.ApartmentNumber), address: (req.body.ContactAddress) }
 	//var test = "(type, color, location, install_date) VALUES ('slide', 'blue', 'south', '2014-04-28')"
-
-	knex.insert(test).into('playground').then(function(id){
+	
+	knex.insert(test).into('users').then(function(id){
 		console.log('ok')
 		return test
 	}).then(function(test){

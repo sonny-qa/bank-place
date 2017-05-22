@@ -5,8 +5,8 @@ exports.up = function(knex, Promise) {
 
         knex.schema.createTable('users', function(table) {
             table.increments('uid').primary();
-            table.string('first_name');
-            table.string('last_name');
+            table.string('First_Name');
+            table.string('Last_Name');
             table.string('email');
             table.string('apt_num');
             table.string('address');
